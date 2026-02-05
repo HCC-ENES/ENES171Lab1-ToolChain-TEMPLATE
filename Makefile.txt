@@ -1,0 +1,17 @@
+make
+CXX=g++
+CXXFLAGS=-std=c++17 -Wall -Wextra -Iinclude
+
+all: sensor_app
+
+sensor_app: main.o sensor.o
+    $(CXX) $(CXXFLAGS) main.o sensor.o -o sensor_app
+
+main.o: src/main.cpp include/sensor.h
+    $(CXX) $(CXXFLAGS) -c src/main.cpp
+
+sensor.o: src/sensor.cpp include/sensor.h
+    $(CXX) $(CXXFLAGS) -c src/sensor.cpp
+
+clean:
+    rm -f *.o sensor_app
